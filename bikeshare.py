@@ -2,8 +2,6 @@ import time
 import pandas as pd
 import numpy as np
 
-
-
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
@@ -11,6 +9,9 @@ months = {'january' : 1, 'february' : 2, 'march' : 3, 'april' : 4, 'may' : 5 , '
 cities = ['chicago','new york city','washington']
 days = ['all', 'monday', 'tuesday','wednesday','thursday','friday','saturday','sunday']
 
+# Function to retrieve user preference about the get_filters
+# Firstly the user must choose a city between three databases
+# Secondly he/she must choose the type of filter : by month , by day , both  or none
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
@@ -21,7 +22,7 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    # Get user input for city (chicago, new york city, washington)
+    # Get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     city = 'none'
     month = 'none'
     day ='none'
@@ -52,13 +53,11 @@ def get_filters():
     else :
         month = 'none'
         day = 'none'
-
-    # Printing the duration of function execution
+# Printing the duration of function execution
     print('-'*40)
     return city, month, day
 
-# Function for loading database
-
+# Function to load data from csv files and to add columns for Start Time, Month, Day and Hour according to the filters
 def load_data(city, month, day):
     """
     Loads data for the specified city and filters by month and day if applicable.
@@ -90,7 +89,8 @@ def load_data(city, month, day):
         df ['Filter Type'] = 'none'
     return df
 
-# Function for calculating time statistics
+# Function to display time statistics according to city data and filters
+# The function must calculate the most common month, day and hour regarding to user's demande
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
@@ -132,6 +132,7 @@ def time_stats(df):
     print('-'*40)
 
 
+# Function to display the most common start station, end station & trip (start station - end station)
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
 
@@ -142,12 +143,12 @@ def station_stats(df):
     start_station = df['Start Station'].mode()[0]
     start_station_count = df[df['Start Station'] == start_station]['Start Station'].count()
     print('The most common start station is {} ,count : {}.'.format(start_station, start_station_count))
-    # Display most commonly noused end station
+    # Display most commonly used end station
     end_station = df['End Station'].mode()[0]
     end_station_count = df[df['End Station'] == end_station]['End Station'].count()
     print('The most common end station is {} ,count : {}.'.format(end_station, end_station_count))
 
-    # Display most frequent combination of start station and end station trip
+# Display most frequent combination of start station and end station trip
     df['Trip'] = 'From : ' + df['Start Station'] + ' To : ' + df['End Station']
     trip = df['Trip'].mode()[0]
     trip_count = df[df['Trip'] == trip]['Trip'].count()
@@ -159,7 +160,9 @@ def station_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-
+# Function to calculate trip duration statistics such as
+# total travel time in day, hour ,minutes & seconds
+# average travel time in day, hour ,minutes & seconds
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
@@ -173,7 +176,8 @@ def trip_duration_stats(df):
     total_travel_time_seconds = int(((df['Trip Duration'].sum() % 86400) % 3600) % 60)
     print('Tha total travel time is {} seconds which is equal to : {} days , {} hours , {} minutes and {} seconds'.format(int(df['Trip Duration'].sum()),total_travel_time_day,total_travel_time_hours,total_travel_time_minutes,total_travel_time_seconds))
 
-    # Display mean travel time
+
+    # Display average travel time
     mean_travel_time_hours = int(df['Trip Duration'].mean())//3600
     mean_travel_time_minutes = (int(df['Trip Duration'].mean())%3600) // 60
     mean_travel_time_seconds = (int(df['Trip Duration'].mean())%3600) % 60
@@ -182,7 +186,10 @@ def trip_duration_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-
+# Function to display user statistics such as
+# user types (subscriber/)
+# user gender (if it exists)
+# user date of birth (if it exists)
 def user_stats(df):
     """Displays statistics on bikeshare users."""
 
@@ -214,8 +221,10 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+# Function to display data statistics by 5 rows.
+# The function allows the user to stop data display anytime he/she likes
 def display_data(df):
-    # Borrowed form https://towardsdatascience.com/pretty-displaying-tricks-for-columnar-data-in-python-2fe3b3ed9b83
+    # This line of code has been borrowed form https://towardsdatascience.com/pretty-displaying-tricks-for-columnar-data-in-python-2fe3b3ed9b83
     pd.options.display.max_columns = None
 
     view_data = input('\nWould you like to view 5 rows of individual trip data? Enter yes or no\n')
@@ -225,6 +234,7 @@ def display_data(df):
         start_loc += 5
         view_data = input("Do you wish to see the next 5 rows of data?: ").lower()
 
+# main function which calls all the function by order
 def main():
     while True:
         city, month, day = get_filters()
@@ -239,7 +249,6 @@ def main():
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
-
 
 if __name__ == "__main__":
 	main()
