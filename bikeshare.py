@@ -57,7 +57,7 @@ def get_filters():
     print('-'*40)
     return city, month, day
 
-
+# Function to load data from csv files and to add columns for Start Time, Month, Day and Hour according to the filters
 def load_data(city, month, day):
     """
     Loads data for the specified city and filters by month and day if applicable.
@@ -89,7 +89,8 @@ def load_data(city, month, day):
         df ['Filter Type'] = 'none'
     return df
 
-
+# Function to display time statistics according to city data and filters
+# The function must calculate the most common month, day and hour regarding to user's demande
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
@@ -221,7 +222,7 @@ def display_data(df):
         start_loc += 5
         view_data = input("Do you wish to see the next 5 rows of data?: ").lower()
 
-# main function which calls all the function by order     
+# main function which calls all the function by order
 def main():
     while True:
         city, month, day = get_filters()
