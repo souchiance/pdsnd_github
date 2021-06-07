@@ -157,7 +157,9 @@ def station_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-
+# Function to calculate trip duration statistics such as
+# total travel time in day, hour ,minutes & seconds
+# average travel time in day, hour ,minutes & seconds
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
@@ -180,7 +182,10 @@ def trip_duration_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-
+# Function to display user statistics such as
+# user types (subscriber/)
+# user gender (if it exists)
+# user date of birth (if it exists)
 def user_stats(df):
     """Displays statistics on bikeshare users."""
 
