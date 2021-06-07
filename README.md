@@ -7,7 +7,5 @@
 ### Use Python to understand U.S. bikeshare data. Calculate statistics and build an interactive environment where a user chooses the data and filter for a data set to analyse
 
 ### Database of three cities : New York City, Washington & Chicago
-Include the files used
 
-### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
+### 2 lines of codes has been inspired form https://www.geeksforgeeks.org/python-get-key-from-value-in-dictionary/
