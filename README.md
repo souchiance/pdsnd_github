@@ -8,4 +8,6 @@
 
 ### Database of three cities : New York City, Washington & Chicago
 
-### 2 lines of codes has been inspired form https://www.geeksforgeeks.org/python-get-key-from-value-in-dictionary/
+### CREDITS :
+### 1- 2 lines of codes has been inspired form https://www.geeksforgeeks.org/python-get-key-from-value-in-dictionary/
+### 2- Borrowed form https://towardsdatascience.com/pretty-displaying-tricks-for-columnar-data-in-python-2fe3b3ed9b83
